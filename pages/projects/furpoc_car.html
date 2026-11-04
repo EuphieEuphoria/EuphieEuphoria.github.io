@@ -5,12 +5,32 @@
     <title>Thing</title>
     <link rel="stylesheet" href="\Assets\css\index.css">
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.4.0/model-viewer.min.js"></script>
+    <script>
+        function isMobile() {
+            const userAgent = navigator.userAgent;
+
+            const mobileUserAgent = /Android|iPhone|iPod|Mobile/i.test(userAgent);
+            const mobileScreen = window.matchMedia('(max-width: 768px)').matches;
+
+            return mobileUserAgent || mobileScreen
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewer = document.querySelector('model-viewer');
+
+            if (!viewer) return;
+
+            viewer.src = isMobile()
+                ? "/assets/Models/furpoc_car_mobile.glb"
+                : "/assets/Models/furpoc_car.glb"
+
+        });
+    </script>
 </head>
 
 <body>
     <model-viewer
     alt="3D Scan of a car covered in writing"
-    src="\assets\Models\500k Furpoc Car Reorient CLEANER no vertcolor.glb"
     camera-controls
     environment-image="neutral"
     touch-action="pan-y"
